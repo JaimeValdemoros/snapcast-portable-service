@@ -1,5 +1,6 @@
 {
   concatText,
+  librespot,
   portableService,
   snapcast,
 }:
@@ -22,6 +23,10 @@ portableService {
     {
       object = "${snapcast}/etc/snapserver.conf";
       symlink = "/etc/snapserver.conf";
+    }
+    {
+      object = "${librespot}/bin/librespot";
+      symlink = "/bin/librespot";
     }
   ];
 }

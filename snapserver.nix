@@ -5,20 +5,15 @@
   snapcast,
 }:
 portableService {
-  pname = "snapcast";
+  pname = "snapserver";
   inherit (snapcast) version;
   units = [
-    (concatText "snapcast-server.service" ["${snapcast.src}/extras/package/rpm/snapserver.service"])
-    (concatText "snapcast-client.service" ["${snapcast.src}/extras/package/rpm/snapclient.service"])
+    (concatText "snapserver.service" ["${snapcast.src}/extras/package/rpm/snapserver.service"])
   ];
   symlinks = [
     {
       object = "${snapcast}/bin/snapserver";
       symlink = "/usr/bin/snapserver";
-    }
-    {
-      object = "${snapcast}/bin/snapclient";
-      symlink = "/usr/bin/snapclient";
     }
     {
       object = "${snapcast}/etc/snapserver.conf";

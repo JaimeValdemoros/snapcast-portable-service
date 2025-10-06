@@ -21,8 +21,11 @@
         };
       in {
         packages = {
-          default = self.packages.${system}.snapcast-portable-service;
-          inherit (pkgs) snapcast snapcast-portable-service;
+          default = pkgs.symlinkJoin {
+            name = "snapcast";
+            paths = [pkgs.snapserver-portable-service pkgs.snapclient-portable-service];
+          };
+          inherit (pkgs) snapserver-portable-service snapclient-portable-service;
         };
         formatter = pkgs.alejandra;
         devShells.default = pkgs.mkShell {
@@ -35,7 +38,8 @@
     ))
     // {
       overlays.default = final: prev: {
-        snapcast-portable-service = final.callPackage ./portable-service.nix {};
+        snapserver-portable-service = final.callPackage ./snapserver.nix {};
+        snapclient-portable-service = final.callPackage ./snapclient.nix {};
       };
       nixosModules.default = {
         pkgs,

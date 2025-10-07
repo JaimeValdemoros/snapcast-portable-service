@@ -9,6 +9,7 @@ portableService {
   units = [
     (concatText "snapclient.service" [./snapclient.service])
   ];
+  emptyDirs = [ "/var/lib/snapclient" ];
   symlinks = [
     {
       object = "${snapcast}/bin/snapclient";

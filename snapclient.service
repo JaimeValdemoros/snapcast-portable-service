@@ -13,6 +13,7 @@ SupplementaryGroups=audio
 StateDirectory=snapclient
 Environment=HOME=/var/lib/snapclient
 
+Environment=SNAPCLIENT_OPTS=""
 ExecStart=/bin/snapclient --logsink=system $SNAPCLIENT_OPTS
 Restart=on-failure
 

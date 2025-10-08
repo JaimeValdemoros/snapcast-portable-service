@@ -11,13 +11,15 @@ SupplementaryGroups=audio
 
 # Read config from snapserver.conf if available
 BindReadOnlyPaths=-/etc/snapserver.conf
+# Use for default fifo. Created by snapserver.socket
+BindPaths=%t/snapserver
 
 # Store state in /var/lib/snapserver
 StateDirectory=snapserver
 Environment=HOME=/var/lib/snapserver
 
-# Use for default fifo. Created by snapserver.socket
-BindPaths=%t/snapserver
+# Access to avahi socket
+BindReadOnlyPaths=-/run/avahi-daemon
 
 Environment=SNAPSERVER_OPTS=""
 ExecStart=/bin/snapserver --logging.sink=system --server.datadir=${HOME} $SNAPSERVER_OPTS

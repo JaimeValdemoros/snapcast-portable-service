@@ -1,0 +1,5 @@
+[Socket]
+ListenFIFO=%t/snapserver/fifo
+
+[Install]
+WantedBy=sockets.target

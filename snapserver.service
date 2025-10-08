@@ -16,6 +16,9 @@ BindReadOnlyPaths=-/etc/snapserver.conf
 StateDirectory=snapserver
 Environment=HOME=/var/lib/snapserver
 
+# Use for default fifo. Created by snapserver.socket
+BindPaths=%t/snapserver
+
 Environment=SNAPSERVER_OPTS=""
 ExecStart=/bin/snapserver --logging.sink=system --server.datadir=${HOME} $SNAPSERVER_OPTS
 Restart=on-failure

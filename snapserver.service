@@ -1,0 +1,24 @@
+[Unit]
+Description=Snapcast server
+Wants=avahi-daemon.service
+After=network-online.target time-sync.target avahi-daemon.service
+
+[Service]
+# Create a user in the audio group
+DynamicUser=yes
+User=snapserver
+SupplementaryGroups=audio
+
+# Read config from snapserver.conf if available
+BindReadOnlyPaths=-/etc/snapserver.conf
+
+# Store state in /var/lib/snapserver
+StateDirectory=snapserver
+Environment=HOME=/var/lib/snapserver
+
+Environment=SNAPSERVER_OPTS=""
+ExecStart=/bin/snapserver --logging.sink=system --server.datadir=${HOME} $SNAPSERVER_OPTS
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

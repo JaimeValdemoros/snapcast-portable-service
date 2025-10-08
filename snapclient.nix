@@ -1,13 +1,17 @@
 {
   concatText,
   portableService,
+  replaceVars,
   snapcast,
 }:
 portableService {
   pname = "snapclient";
   inherit (snapcast) version;
   units = [
-    (concatText "snapclient.service" [./snapclient.service])
+    (replaceVars ./snapclient.service {
+      STATE_DIR = "snapclient";
+      DEFAULT_SNAPCLIENT_OPTS = "";
+    })
   ];
   # required to mount StateDirectory
   emptyDirs = ["/var/lib/snapclient"];
